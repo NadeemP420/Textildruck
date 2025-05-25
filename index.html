@@ -5,46 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T-Shirt Designer</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #tshirt-container { position: relative; display: inline-block; }
-        #logo { position: absolute; top: 50px; left: 50px; width: 100px; height: auto; display: none; }
-        .tshirt { width: 300px; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+        }
+        #container {
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #tshirt-container {
+            position: relative;
+            display: inline-block;
+        }
+        .tshirt {
+            width: 300px;
+            transition: 0.3s;
+        }
+        #logo {
+            position: absolute;
+            top: 50px;
+            left: 100px;
+            width: 100px;
+            height: auto;
+            display: none;
+        }
+        select, input {
+            padding: 8px;
+            margin: 10px;
+            font-size: 16px;
+        }
     </style>
 </head>
-<body>
-    <h1>Gestalte dein eigenes T-Shirt</h1>
-    
-    <!-- Auswahl für Farbe und Modell -->
-    <label for="color">T-Shirt-Farbe:</label>
-    <select id="color">
-        <option value="white">Weiß</option>
-        <option value="option>
-        <option value="red">Rot</option>
-        <option value="blue">Blau</option>
-    </select>
+<body dein eigenes T-Shirt</h1>
+    <div id="container">
+        <label for="model">Modell:</label>
+        <select id="model">
+            <option value="tshirt">T-Shirt</option>
+            <option value="vneck">V-Ausschnitt</option>
+            <option value="hoodie">Hoodie</option>
+        </select>
 
-    <label for="model">Modell:</label>
-    <select id="model">
-        <option value="tshirt">T-Shirt</option>
-        <option value="vneck">V-Ausschnitt</option>
-        <option value="hoodie">Hoodie</option>
-    </select>
+        <label for="color">Farbe:</label>
+        <select id="color">
+            <option value="white">Weiß</option>
+            <option value="black">Schwarz</option>
+            <option value="red">Rot</option>
+            <option value="blue">Blau</option>
+        </select>
 
-    <label for="size">Größe:</label>
-    <select id="size">
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-    </select>
+        <label for="size">Größe:</label>
+        <select id="size">
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+        </select>
 
-    <br><br>
+        <br><br>
 
-    <input type="file" id="logo-upload" accept="image/*">
-    
-    <div id="tshirt-container">
-        <img id="tshirt" src="tshirt_white.png" class="tshirt" alt="T-Shirt">
-        <img id="logo" alt="Dein Logo">
+        <input type="file" id="logo-upload" accept="image/*">
+        
+        <div id="tshirt-container">
+            <img id="tshirt" src="tshirt_white.png" class="tshirt" alt="T-Shirt">
+            <img id="logo" alt="Dein Logo">
+        </div>
     </div>
 
     <script>
