@@ -4,62 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T-Shirt Designer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #tshirt-container { width: 400px; height: 400px; margin: auto; }
-        #fileInput { margin-bottom: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #tshirt-container {
+            position: relative;
+            display: inline-block;
+        }
+        #logo {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px;
+            height: auto;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1>Gestalte dein eigenes T-Shirt</h1>
-    <input type="file" id="fileInput" accept="image/*">
-    <div id="tshirt-container"></div>
+    <input type="file" id="logo-upload" accept="image/*">
+    <div id="tshirt-container">
+        <img src="tshirt.png" alt="T-Shirt">
+        <img id="logo" alt="Dein Logo">
+    </div>
 
     <script>
-        let scene, camera, renderer, tShirt, textureLoader;
-
-        function init() {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            camera.position.z = 3;
-
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(400, 400);
-            document.getElementById("tshirt-container").appendChild(renderer.domElement);
-
-            let light = new THREE.DirectionalLight(0xffffff, 1);
-            light.position.set(1, 1, 1).normalize();
-            scene.add(light);
-
-            textureLoader = new THREE.TextureLoader();
-            let geometry = new THREE.BoxGeometry(2, 3, 0.5); // Einfaches T-Shirt-Modell
-            let material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-            tShirt = new THREE.Mesh(geometry, material);
-            scene.add(tShirt);
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            tShirt.rotation.y += 0.01; // Rotationseffekt
-            renderer.render(scene, camera);
-        }
-
-        document.getElementById("fileInput").addEventListener("change", function(event) {
-            const file = event.target.files[0];
+        document.getElementById('logo-upload').addEventListener('change', function(event) {
+            let file = event.target.files[0];
             if (file) {
-                const reader = new FileReader();
+                let reader = new FileReader();
                 reader.onload = function(e) {
-                    let texture = textureLoader.load(e.target.result);
-                    tShirt.material.map = texture;
-                    tShirt.material.needsUpdate = true;
+                    let logo = document.getElementById('logo');
+                    logo.src = e.target.result;
+                    logo.style.display = 'block';
                 };
                 reader.readAsDataURL(file);
             }
         });
-
-        init();
-        animate();
     </script>
 </body>
 </html>
