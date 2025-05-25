@@ -1,34 +1,65 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Textildruck Vorschau</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>T-Shirt Designer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #tshirt-container { width: 400px; height: 400px; margin: auto; }
+        #fileInput { margin-bottom: 20px; }
+    </style>
 </head>
 <body>
-    <h2>Gestalte dein Shirt</h2>
-    <div class="controls">
-        <label>Bild/Logo hochladen:</label>
-        <input type="file" id="logoInput" accept="image/*">
+    <h1>Gestalte dein eigenes T-Shirt</h1>
+    <input type="file" id="fileInput" accept="image/*">
+    <div id="tshirt-container"></div>
 
+    <script>
+        let scene, camera, renderer, tShirt, textureLoader;
 
-        <label>Text hinzufügen:</label>
-        <input type="text" id="customText" placeholder="Dein Wunschtext">
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+            camera.position.z = 3;
 
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(400, 400);
+            document.getElementById("tshirt-container").appendChild(renderer.domElement);
 
-        <button onclick="showFront()">Vorderseite anzeigen</button>
-        <button onclick="showBack()">Rückseite anzeigen</button>
-    </div>
+            let light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(1, 1, 1).normalize();
+            scene.add(light);
 
+            textureLoader = new THREE.TextureLoader();
+            let geometry = new THREE.BoxGeometry(2, 3, 0.5); // Einfaches T-Shirt-Modell
+            let material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            tShirt = new THREE.Mesh(geometry, material);
+            scene.add(tShirt);
+        }
 
-    <div class="shirt-preview">
-        <img id="shirtImage" src="https://i.imgur.com/IEhV6YQ.png" alt="Shirt Vorschau">
-        <img id="logoPreview" class="upload-logo" style="display:none;">
-        <div id="textPreview" class="text-overlay"></div>
-    </div>
+        function animate() {
+            requestAnimationFrame(animate);
+            tShirt.rotation.y += 0.01; // Rotationseffekt
+            renderer.render(scene, camera);
+        }
 
+        document.getElementById("fileInput").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let texture = textureLoader.load(e.target.result);
+                    tShirt.material.map = texture;
+                    tShirt.material.needsUpdate = true;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
-    <script src="script.js"></script>
+        init();
+        animate();
+    </script>
 </body>
 </html>
