@@ -177,3 +177,43 @@
   </div>
   <p>Wenn du ein Logo im Upload-Bereich auswählst, wird es hier angezeigt.</p>
 </section>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jT - T-Shirt Designer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>jT Design Studio</h1>
+        <nav>
+            <ul>
+                <li><a href="#design" class="nav-link">T-Shirt Design</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="design" class="section active">
+            <h2>Gestalte dein T-Shirt</h2>
+            <div class="design-options">
+                <label for="tshirtColor">T-Shirt Farbe:</label>
+                <input type="color" id="tshirtColor" value="#ffffff">
+                <label for="logoUpload">Logo hochladen:</label>
+                <input type="file" id="logoUpload" accept="image/*">
+            </div>
+            <div class="canvas-container">
+                <canvas id="designCanvas" width="400" height="500"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 jT Fashion</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
