@@ -252,3 +252,35 @@ function addTextAndLogo() {
     ctx.drawImage(uploadedLogo, x, y, logoWidth, logoHeight);
   }
 }
+// Annahme: outlineImage ist das Bild für die T-Shirt-Outline (tshirt_outline.png)
+const canvas = document.getElementById('tshirtCanvas');
+const ctx = canvas.getContext('2d');
+
+// Laden der T-Shirt Outline (die Datei muss im gleichen Ordner liegen)
+const outlineImage = new Image();
+outlineImage.src = 'tshirt_outline.png';
+
+// Funktion zum Zeichnen des Designs
+function drawDesign() {
+  // Beispiel: Auslesen der gewählten Farbe
+  const tshirtColor = document.getElementById('designColorPicker').value;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Fülle den Hintergrund mit der gewählten Farbe
+  ctx.fillStyle = tshirtColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Zeichne die T-Shirt Outline, sobald diese geladen ist
+  if (outlineImage.complete) {
+    ctx.drawImage(outlineImage, 0, 0, canvas.width, canvas.height);
+    // Hier kannst du auch logoImage, Texte oder weitere Elemente zeichnen.
+  } else {
+    outlineImage.onload = drawDesign;
+  }
+}
+  
+// Farbauswahl aktualisiert das Design
+document.getElementById('designColorPicker').addEventListener('change', drawDesign);
+
+// Beim Laden der Seite initial zeichnen
+window.addEventListener('load', drawDesign);
