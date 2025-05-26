@@ -14,6 +14,7 @@
         <li><a href="#" class="nav-link" data-section="home">Home</a></li>
         <li><a href="#" class="nav-link" data-section="shop">Shop</a></li>
         <li><a href="#" class="nav-link" data-section="upload">Logo Upload</a></li>
+        <li><a href="#" class="nav-link" data-section="design">T-Shirt Design</a></li>
         <li><a href="#" class="nav-link" data-section="login">Login</a></li>
         <li><a href="#" class="nav-link" data-section="cart">Warenkorb</a></li>
       </ul>
@@ -34,19 +35,18 @@
     <section id="shop" class="section">
       <h2>Shop</h2>
       <div class="product-grid">
-        <!-- Produkt: Oversize T-Shirt für Frauen -->
         <div class="product">
           <h3>Oversize T-Shirt</h3>
-          <!-- Der img-Pfad "mockup_default.png" sollte durch ein passendes Bild ersetzt werden -->
+          <!-- Ersetze diesen Pfad durch ein passendes Produktbild -->
           <img id="tshirt-mockup" src="mockup_default.png" alt="Oversize T-Shirt">
-          <p>Wähle deine Farbe:</p>
+          <p>Farbe wählen:</p>
           <input type="color" id="colorPicker" value="#d4a5a5">
           <button class="add-to-cart">In den Warenkorb</button>
         </div>
       </div>
     </section>
     
-    <!-- Upload Section -->
+    <!-- Logo Upload Section -->
     <section id="upload" class="section">
       <h2>Logo Upload</h2>
       <form id="uploadForm">
@@ -54,6 +54,17 @@
         <input type="file" id="logoFile" accept="image/*">
         <div id="logoPreview"></div>
       </form>
+    </section>
+    
+    <!-- T-Shirt Design Section -->
+    <section id="design" class="section">
+      <h2>T-Shirt Design</h2>
+      <p>Wähle die T-Shirt-Farbe und sieh dir dein Design an:</p>
+      <input type="color" id="designColorPicker" value="#d4a5a5">
+      <div id="tshirt-container">
+        <canvas id="tshirtCanvas" width="300" height="400"></canvas>
+      </div>
+      <p>Hinweis: Wenn du im Logo Upload ein Logo auswählst, wird es hier angezeigt.</p>
     </section>
     
     <!-- Login Section -->
