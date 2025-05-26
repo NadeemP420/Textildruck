@@ -284,3 +284,50 @@ document.getElementById('designColorPicker').addEventListener('change', drawDesi
 
 // Beim Laden der Seite initial zeichnen
 window.addEventListener('load', drawDesign);
+document.addEventListener("DOMContentLoaded", function() {
+    const canvas = document.getElementById('designCanvas');
+    const ctx = canvas.getContext('2d');
+    const tshirtColorPicker = document.getElementById('tshirtColor');
+    const logoUpload = document.getElementById('logoUpload');
+
+    let uploadedLogo = null;
+
+    // Hintergrundfarbe ändern
+    tshirtColorPicker.addEventListener('change', function() {
+        drawDesign();
+    });
+
+    // Logo hochladen
+    logoUpload.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedLogo = new Image();
+                uploadedLogo.src = e.target.result;
+                uploadedLogo.onload = function() {
+                    drawDesign();
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Design aktualisieren
+    function drawDesign() {
+        const tshirtColor = tshirtColorPicker.value;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = tshirtColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (uploadedLogo) {
+            const logoWidth = 100;
+            const logoHeight = (uploadedLogo.height / uploadedLogo.width) * logoWidth;
+            const x = (canvas.width - logoWidth) / 2;
+            const y = canvas.height / 2;
+            ctx.drawImage(uploadedLogo, x, y, logoWidth, logoHeight);
+        }
+    }
+
+    drawDesign();
+});
