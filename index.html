@@ -3,107 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T-Shirt Designer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-        }
-        #container {
-            margin: 20px auto;
-            padding: 20px;
-            background: white;
-            width: 80%;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        #tshirt-container {
-            position: relative;
-            display: inline-block;
-        }
-        .tshirt {
-            width: 300px;
-            transition: 0.3s;
-        }
-        #logo {
-            position: absolute;
-            top: 50px;
-            left: 100px;
-            width: 100px;
-            height: auto;
-            display: none;
-        }
-        select, input {
-            padding: 8px;
-            margin: 10px;
-            font-size: 16px;
-        }
-    </style>
+    <title>jT - Mode für Frauen</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body dein eigenes T-Shirt</h1>
-    <div id="container">
-        <label for="model">Modell:</label>
-        <select id="model">
-            <option value="tshirt">T-Shirt</option>
-            <option value="vneck">V-Ausschnitt</option>
-            <option value="hoodie">Hoodie</option>
-        </select>
+<body>
+    <header>
+        <h1>jT - Elegante Mode für Frauen</h1>
+        <nav>
+            <ul>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#ueber-uns">Über uns</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <label for="color">Farbe:</label>
-        <select id="color">
-            <option value="white">Weiß</option>
-            <option value="black">Schwarz</option>
-            <option value="red">Rot</option>
-            <option value="blue">Blau</option>
-        </select>
+    <section id="hero">
+        <h2>Stilvoll. Elegant. Selbstbewusst.</h2>
+        <p>Entdecke die neueste Kollektion und personalisiere dein Design.</p>
+        <button>Jetzt shoppen</button>
+    </section>
 
-        <label for="size">Größe:</label>
-        <select id="size">
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-
-        <br><br>
-
-        <input type="file" id="logo-upload" accept="image/*">
-        
-        <div id="tshirt-container">
-            <img id="tshirt" src="tshirt_white.png" class="tshirt" alt="T-Shirt">
-            <img id="logo" alt="Dein Logo">
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('logo-upload').addEventListener('change', function(event) {
-            let file = event.target.files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    let logo = document.getElementById('logo');
-                    logo.src = e.target.result;
-                    logo.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById('color').addEventListener('change', function() {
-            document.getElementById('tshirt').src = "tshirt_" + this.value + ".png";
-        });
-
-        document.getElementById('model').addEventListener('change', function() {
-            document.getElementById('tshirt').src = this.value + "_" + document.getElementById('color').value + ".png";
-        });
-    </script>
+    <footer>
+        <p>&copy; 2025 jT Fashion</p>
+    </footer>
 </body>
 </html>
