@@ -158,3 +158,97 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 });
+// Navigation zwischen den Sections
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href').substring(1);
+    showSection(targetId);
+  });
+});
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(sec => {
+    if (sec.id === id) {
+      sec.classList.add('active');
+    } else {
+      sec.classList.remove('active');
+    }
+  });
+}
+
+// T-Shirt Design: Canvas-Logik
+const canvas = document.getElementById('designCanvas');
+const ctx = canvas.getContext('2d');
+
+// Wir laden die T-Shirt-Outline (muss im gleichen Ordner liegen)
+const outlineImage = new Image();
+outlineImage.src = 'tshirt_outline.png';
+
+// Globale Variable zur Speicherung des hochgeladenen Logos
+let uploadedLogo = null;
+
+// Wenn ein neues Logo hochgeladen wird…
+document.getElementById('logoUpload').addEventListener('change', function() {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      uploadedLogo = new Image();
+      uploadedLogo.src = e.target.result;
+      uploadedLogo.onload = function() {
+        // Optional: Automatisch das Design aktualisieren, wenn ein Logo geladen wurde.
+        drawDesign();
+      };
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// Design aktualisieren, Button-Klick
+document.getElementById('updateDesign').addEventListener('click', drawDesign);
+
+function drawDesign() {
+  // T-Shirt Hintergrundfarbe
+  const tshirtColor = document.getElementById('tshirtColor').value;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Fülle das Canvas mit der gewählten Farbe
+  ctx.fillStyle = tshirtColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Nachdem die T-Shirt-Farbe gesetzt ist, zeichnen wir die Outline
+  // Wir warten, falls sie noch nicht geladen ist
+  if (outlineImage.complete) {
+    ctx.drawImage(outlineImage, 0, 0, canvas.width, canvas.height);
+    addTextAndLogo();
+  } else {
+    outlineImage.onload = function() {
+      ctx.drawImage(outlineImage, 0, 0, canvas.width, canvas.height);
+      addTextAndLogo();
+    };
+  }
+}
+
+// Funktion, um Text und Logo in das Design zu integrieren
+function addTextAndLogo() {
+  // Text hinzufügen, wenn vorhanden
+  const designText = document.getElementById('designText').value.trim();
+  if (designText !== "") {
+    const textColor = document.getElementById('textColor').value;
+    ctx.fillStyle = textColor;
+    ctx.font = '30px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(designText, canvas.width / 2, canvas.height / 2);
+  }
+
+  // Falls ein Logo hochgeladen wurde, zeichnen wir es
+  if (uploadedLogo) {
+    // Das Logo wird zentriert und in einer festen Breite (z. B. 100px) dargestellt
+    const logoWidth = 100;
+    const logoHeight = (uploadedLogo.height / uploadedLogo.width) * logoWidth;
+    const x = (canvas.width - logoWidth) / 2;
+    const y = canvas.height - logoHeight - 20; // 20px Abstand vom unteren Rand
+    ctx.drawImage(uploadedLogo, x, y, logoWidth, logoHeight);
+  }
+}
