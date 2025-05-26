@@ -35,13 +35,12 @@ nav a {
   font-weight: bold;
 }
 
-/* Jede Section wird standardmäßig versteckt */
+/* Sections */
 .section {
   display: none;
   padding: 20px;
 }
 
-/* Aktive Section wird angezeigt */
 .section.active {
   display: block;
 }
@@ -73,6 +72,15 @@ nav a {
   height: auto;
 }
 
+/* Container für Canvas in der Design-Sektion */
+#tshirt-container {
+  margin: 20px auto;
+  width: 300px;
+  height: 400px;
+  border: 2px solid #ccc;
+}
+
+/* Buttons */
 button {
   background-color: #d4a5a5;
   color: white;
