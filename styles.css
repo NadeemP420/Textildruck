@@ -203,3 +203,49 @@ footer {
     margin-bottom: 5px;
   }
 }
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f0e3;
+    text-align: center;
+}
+
+header {
+    background-color: #d4a5a5;
+    color: white;
+    padding: 15px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.section {
+    display: none;
+    padding: 20px;
+}
+
+.section.active {
+    display: block;
+}
+
+.canvas-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+canvas {
+    border: 1px solid #ccc;
+}
